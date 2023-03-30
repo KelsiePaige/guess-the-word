@@ -15,6 +15,15 @@ const message = document.querySelector(".message");
 // The hidden button that will appear prompting the player to play again.
 const button = document.querySelector(".play-again");
 // Starting word for testing
-const word = "magnolia";
+let word = "magnolia";
 
-//console.log(guessedLetters, guess, letter, wordInProgress, remainingGuesses, guessCount, message, button, word);
+const eachLetter = function (word) {
+    const letterArray = [];
+    for (const letter of word) {
+        letterArray.push("●");
+    }
+    wordInProgress.innerText = letterArray.join("");
+    
+};
+
+eachLetter(word);
