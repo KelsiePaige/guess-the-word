@@ -27,3 +27,11 @@ const eachLetter = function (word) {
 };
 
 eachLetter(word);
+
+guess.addEventListener("click", function (e) {
+    e.preventDefault();
+    const input = "";
+    console.log(input);
+});
+
+
