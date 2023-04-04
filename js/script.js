@@ -7,7 +7,7 @@ const letter = document.querySelector(".letter");
 // The empty paragraph where the word in progress will apppear.
 const wordInProgress = document.querySelector(".word-in-progress");
 // The paragraph where the remaining guesses will display.
-const remainingGuesses = document.querySelector(".remaining");
+const remaining = document.querySelector(".remaining");
 // The span inside the paragraph where the remaining guesses will display.
 const guessCount = document.querySelector("span");
 // The empty paragraph where messages will appear when the player guesses a letter.
@@ -17,6 +17,8 @@ const button = document.querySelector(".play-again");
 // Starting word for testing
 const word = "magnolia";
 const guessedLetters = [];
+let remainingGuesses = 8;
+
 
 const eachLetter = function (word) {
     const letterArray = [];
@@ -62,6 +64,7 @@ const makeGuess = function (guess) {
         guessedLetters.push(guess);
         console.log(guessedLetters);
         playerGuesses();
+        countGuessesRemaining(guess);
         updateWordInProgress(guessedLetters);
     }
 };
@@ -91,11 +94,28 @@ const updateWordInProgress = function (guessedLetters) {
     checkForWin();
 };
 
+const countGuessesRemaining = function (guess) {
+    if (word.toUpperCase().includes(guess)) {
+        message.innerHTML = "Letter included";
+    } else {
+        message.innerHTML = "Not included";
+        remainingGuesses -= 1;
+        console.log(remainingGuesses);
+    }
+    if (remainingGuesses === 0) {
+        message.innerHTML = "Game over";
+    } else if (remainingGuesses === 1) {
+        guessCount.innerHTML = 1; 
+        console.log(remainingGuesses);
+    } else {
+        guessCount.innerHTML = remainingGuesses;
+    }
+};
+
 const checkForWin = function () {
-    console.log(wordInProgress.innerHTML)
-    console.log(word)
     if (wordInProgress.innerHTML === word.toUpperCase()) {
         message.classList.add("win");
         message.innerHTML = '<p class="highlight">You guessed the correct word! Congrats!</p>';
     }
 };
+
