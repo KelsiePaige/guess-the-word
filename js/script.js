@@ -57,9 +57,45 @@ const validate = function (input) {
 const makeGuess = function (guess) {
     guess = guess.toUpperCase();
     if (guessedLetters.includes(guess)) {
-        message.innerText = "Oops! Looks like you already guessed tht letter. Try again.";
+        message.innerText = "Oops! Looks like you already guessed that letter. Try again.";
     } else {
         guessedLetters.push(guess);
         console.log(guessedLetters);
+        playerGuesses();
+        updateWordInProgress(guessedLetters);
+    }
+};
+
+const playerGuesses = function () {
+    guessedLettersList.innerHTML = "";
+    for (const letter of guessedLetters) {
+        const li = document.createElement("li");
+        li.innerText = letter;
+        guessedLettersList.append(li);
+    }
+};
+
+const updateWordInProgress = function (guessedLetters) {
+    const wordUpper = word.toUpperCase();
+    const wordArray = wordUpper.split("");
+    const showWord = [];
+    for (const letter of wordArray) {
+        if (guessedLetters.includes(letter)) {
+            showWord.push(letter.toUpperCase());
+        } else {
+            showWord.push("●");
+        }
+    }
+    //console.log(showWord);
+    wordInProgress.innerText = showWord.join("");
+    checkForWin();
+};
+
+const checkForWin = function () {
+    console.log(wordInProgress.innerHTML)
+    console.log(word)
+    if (wordInProgress.innerHTML === word.toUpperCase()) {
+        message.classList.add("win");
+        message.innerHTML = '<p class="highlight">You guessed the correct word! Congrats!</p>';
     }
 };
