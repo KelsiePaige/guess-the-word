@@ -109,7 +109,6 @@ const updateWordInProgress = function (guessedLetters) {
             showWord.push("●");
         }
     }
-    //console.log(showWord);
     wordInProgress.innerText = showWord.join("");
     checkForWin();
 };
@@ -125,7 +124,7 @@ const countGuessesRemaining = function (guess) {
     }
 
     if (remainingGuesses === 0) {
-        message.innerHTML = `Game over! The word was <span class="highlight">${word}</span>`;
+        message.innerHTML = `Game over! The word was<br><span class="highlight">${word}</span>`;
         startOver();
     } else if (remainingGuesses === 1) {
         guessCount.innerText = `${remainingGuesses}`;
@@ -138,7 +137,7 @@ const countGuessesRemaining = function (guess) {
 const checkForWin = function () {
     if (wordInProgress.innerText === word.toUpperCase()) {
         message.classList.add("win");
-        message.innerHTML = '<p class="highlight">You guessed the correct word! Congrats!</p>';
+        message.innerHTML = '<p>You guessed the correct word! Congrats!</p>';
         
         startOver();
     }   
